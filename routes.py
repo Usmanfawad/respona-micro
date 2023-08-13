@@ -1,6 +1,5 @@
 from main import *
 
-from fastapi_utils.session import FastAPISessionMaker
 from fastapi_utils.tasks import repeat_every
 
 # Root route that runs every 30 seconds.

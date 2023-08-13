@@ -19,3 +19,4 @@ app.add_middleware(
 )
 
 
+from routes import *
