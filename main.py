@@ -36,8 +36,8 @@ async def root():
     try:
         async with httpx.AsyncClient() as client:
             print("Here hitting the API")
-            # resp = await client.get(URL_API_PYTHONANYWHERE, timeout=None)
-            resp = await client.get(URL_API_LOCAL, timeout=None)
+            resp = await client.get(URL_API_PYTHONANYWHERE, timeout=None)
+            # resp = await client.get(URL_API_LOCAL, timeout=None)
             print(resp)
     except Exception as e:
         print(e)
