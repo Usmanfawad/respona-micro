@@ -26,10 +26,11 @@ URL_API_PYTHONANYWHERE = "http://mysteryshops.pythonanywhere.com/home"
 URL_API_LOCAL = "http://127.0.0.1:5000/home"
 
 
-# @repeat_every(seconds=10)
+
 # Running after every 2 hours.
 @app.on_event("startup")
-@repeat_every(seconds=30)
+@repeat_every(seconds=60*120)
+# @repeat_every(seconds=10)
 async def root():
     print("Root route initiated!")
     WORKER_THREAD = True
