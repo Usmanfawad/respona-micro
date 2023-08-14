@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_utils.tasks import repeat_every
 
+import httpx
 
 app = FastAPI()
 
@@ -20,13 +22,23 @@ app.add_middleware(
 
 
 
-from fastapi_utils.tasks import repeat_every
+URL_API_PYTHONANYWHERE = "http://mysteryshops.pythonanywhere.com/home"
+URL_API_LOCAL = "http://127.0.0.1:5000/home"
 
-# Root route that runs every 30 seconds.
+
 @app.on_event("startup")
-@repeat_every(seconds=30)
+# @repeat_every(seconds=10)
 # Running after every 2 hours.
 # @repeat_every(seconds=60*120)
-@app.get("/")
 async def root():
+    print("Root route initiated!")
+    WORKER_THREAD = True
+    try:
+        async with httpx.AsyncClient() as client:
+            print("Here hitting the API")
+            # resp = await client.get(URL_API_PYTHONANYWHERE, timeout=None)
+            resp = await client.get(URL_API_LOCAL, timeout=None)
+            print(resp)
+    except Exception as e:
+        print(e)
     return {"200": "success"}
